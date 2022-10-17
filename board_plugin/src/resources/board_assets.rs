@@ -24,8 +24,11 @@ impl Default for SpriteMaterial {
 pub struct BoardAssets {
     /// Label
     pub label: String,
-    ///
+    /// Board background
     pub board_material: SpriteMaterial,
+    pub tank: SpriteMaterial,
+    pub cover: SpriteMaterial,
+    pub alien: SpriteMaterial,
 }
 
 impl BoardAssets {

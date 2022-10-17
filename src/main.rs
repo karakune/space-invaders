@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy::log;
 use board_plugin::BoardPlugin;
-use board_plugin::resources::{BoardAssets, SpriteMaterial};
+use board_plugin::resources::{BoardOptions, BoardAssets, SpriteMaterial};
 
 #[cfg(feature = "debug")]
 use bevy_inspector_egui::WorldInspectorPlugin;
@@ -68,14 +68,30 @@ fn setup_board(
     mut state: ResMut<State<AppState>>,
     asset_server: Res<AssetServer>,
 ) {
+    // Board plugin options
+    commands.insert_resource(BoardOptions {
+        ..Default::default()
+    });
     // Board assets
-    // commands.insert_resource(BoardAssets {
-    //     label: "Default".to_string(),
-    //     board_material: SpriteMaterial {
-    //         color: Color::WHITE,
-    //         ..Default::default()
-    //     }
-    // });
+    commands.insert_resource(BoardAssets {
+        label: "Default".to_string(),
+        board_material: SpriteMaterial {
+            texture: asset_server.load("sprites/board.png"),
+            color: Color::WHITE
+        },
+        tank: SpriteMaterial {
+            texture: asset_server.load("sprites/tank.png"),
+            color: Color::WHITE
+        },
+        cover: SpriteMaterial {
+            texture: asset_server.load("sprites/cover.png"),
+            color: Color::WHITE
+        },
+        alien: SpriteMaterial {
+            texture: asset_server.load("sprites/alien.png"),
+            color: Color::WHITE
+        }
+    });
     // Plugin activation
     state.set(AppState::InGame).unwrap();
 }
